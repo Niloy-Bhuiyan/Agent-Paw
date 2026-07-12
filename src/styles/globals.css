@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0a0a;
+  --color-bg-2: #111111;
+  --color-fg: #f5f5f5;
+  --color-fg-dim: #9a9a9a;
+  --color-line: #1f1f1f;
+  --color-pop: #ffd23f;
+
+  --font-pixel: var(--font-vt323), "Courier New", monospace;
+  --font-mono: var(--font-jetbrains), "Menlo", monospace;
+  --font-dot: var(--font-dotgothic), monospace;
+
+  --shadow-pixel: 4px 4px 0 0 #ffffff;
+  --shadow-pixel-inv: 4px 4px 0 0 #0a0a0a;
+  --shadow-pixel-pop: 4px 4px 0 0 #ffd23f;
+
+  --breakpoint-3xl: 1800px;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-pop);
+  color: var(--color-bg);
+}
+
+/* ---------- Retro background layers ---------- */
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0) 2px,
+    rgba(255, 255, 255, 0.02) 3px,
+    rgba(255, 255, 255, 0) 4px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* Fine pixel grid used inside demo stages */
+.stage-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes buy-pulse-inv {
+  0%,
+  100% {
+    box-shadow:
+      6px 6px 0 0 var(--color-fg),
+      6px 6px 0 3px var(--color-bg);
+  }
+  50% {
+    box-shadow:
+      3px 3px 0 0 var(--color-fg),
+      3px 3px 0 3px var(--color-bg);
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes tag-wobble {
+  0%,
+  100% {
+    transform: rotate(4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-2px);
+  }
+}
+
+@keyframes paw-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+@keyframes blink-hint {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+.animate-buy-pulse {
+  animation: buy-pulse-inv 2.4s ease-in-out infinite;
+}
+
+.animate-tag-wobble {
+  animation: tag-wobble 1.8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-paw-bounce {
+  animation: paw-bounce 0.9s ease-in-out infinite;
+}
+
+.animate-blink-hint {
+  animation: blink-hint 1.6s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-buy-pulse,
+  .animate-tag-wobble,
+  .animate-paw-bounce,
+  .animate-blink-hint {
+    animation: none;
+  }
+}
+
+/* ---------- Shared component styles ---------- */
+
+.pixel-heading {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.focus-pixel {
+  outline: none;
+}
+
+.focus-pixel:focus-visible {
+  outline: 2px solid var(--color-pop);
+  outline-offset: 3px;
+}
