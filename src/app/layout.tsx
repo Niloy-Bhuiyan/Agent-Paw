@@ -2,9 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { VT323, JetBrains_Mono, DotGothic16 } from "next/font/google";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
-import { BackgroundFX } from "@/components/layout/BackgroundFX";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import "@/styles/globals.css";
 
 const vt323 = VT323({ weight: "400", subsets: ["latin"], variable: "--font-vt323" });
@@ -44,10 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <LanguageProvider>
           <SmoothScrollProvider>
-            <BackgroundFX />
-            <Header />
-            {children}
-            <Footer />
+            <SiteChrome>{children}</SiteChrome>
           </SmoothScrollProvider>
         </LanguageProvider>
       </body>

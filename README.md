@@ -22,6 +22,23 @@ Open http://localhost:3000.
 
 Other scripts: `npm run build` · `npm run lint` · `npm run typecheck` · `npm run format`.
 
+## Desktop pet 🐈
+
+The cat can live directly **on your desktop** — a transparent,
+frameless, always-on-top window that floats over every app:
+
+```bash
+npm run dev       # terminal 1 — serves the app
+npm run desktop   # terminal 2 — opens the pet (bottom-right corner)
+```
+
+Drag its edges to move it · click to make it jump · double-click to
+change fur · right-click to put it to sleep · hover for the ✕ close
+button · **Ctrl+Alt+Q** quits from anywhere. If the web app isn't
+running yet, the window shows a retry screen until it appears.
+Implementation: `desktop/main.js` (Electron shell) + the bare
+`/desktop` route.
+
 ## Documentation
 
 | Doc | Contents |
@@ -126,6 +143,7 @@ The engine pauses off-screen via `IntersectionObserver`, respects
 - [x] Route-transition loading screen (bouncing paws), matching the reference loader
 - [x] AI Companion Pet (/pet): the cat as the interface — 19-emotion FSM, 38 event reactions, 30+ toggleable metrics as bubbles/signs/notes/widgets, 9 personalities, XP/levels/achievements, instant-apply settings, mock simulator + WebSocket live mode (docs/COMPANION_PET.md)
 - [x] Voice Companion (/pet): streaming STT/TTS with adapter layer + mock fallbacks, push-to-talk & hotkey, wake-word architecture, mic waveform/VAD, interruptible speech, floating markdown chat window (syntax highlighting, copy, expandable code), local tool router, persistent learning memory, premium flags (docs/VOICE_COMPANION.md)
+- [x] Desktop pet (`npm run desktop`): transparent always-on-top Electron window — the cat floats over every app, draggable, interactive, with offline-retry screen
 - [ ] Ship real download binaries / checkout (out of scope for a recreation)
 
 ## Notes on tech choices

@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "desktop": "electron desktop/main.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",
@@ -28,6 +29,7 @@
     "@types/node": "^22.15.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
+    "electron": "^43.1.0",
     "eslint": "^9.29.0",
     "eslint-config-next": "15.3.4",
     "prettier": "^3.5.3",
