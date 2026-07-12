@@ -32,11 +32,22 @@ npm run dev       # terminal 1 — serves the app
 npm run desktop   # terminal 2 — opens the pet (bottom-right corner)
 ```
 
-Drag its edges to move it · click to make it jump · double-click to
-change fur · right-click to put it to sleep · hover for the ✕ close
-button · **Ctrl+Alt+Q** quits from anywhere. If the web app isn't
-running yet, the window shows a retry screen until it appears.
-Implementation: `desktop/main.js` (Electron shell) + the bare
+Two modes, chosen with the `PET_MODE` env var:
+
+- **`roam` (default)** — a click-through overlay covering the whole
+  screen. The cat wanders along the bottom of your entire desktop; the
+  overlay becomes clickable only while your pointer is near the cat
+  (position reported over IPC), so it never blocks your work.
+- **`corner`** — a small 300×340 draggable window in the bottom-right.
+  ```bash
+  PET_MODE=corner npm run desktop
+  ```
+
+Click the cat to make it jump · double-click to change fur ·
+right-click to put it to sleep · hover it for the 🌙/✕ buttons ·
+**Ctrl+Alt+Q** quits from anywhere. If the web app isn't running yet,
+the window shows a retry screen until it appears. Implementation:
+`desktop/main.js` + `desktop/preload.js` (Electron shell) and the bare
 `/desktop` route.
 
 ## Documentation

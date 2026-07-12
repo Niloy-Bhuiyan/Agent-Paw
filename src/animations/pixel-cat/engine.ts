@@ -211,6 +211,11 @@ export class CatEngine {
     this.scaleOpt = clamp(scale, 0.2, 0.9);
   }
 
+  /** Cat anchor position in stage pixels (x = center, y = ground line). */
+  getPosition(): { x: number; y: number; height: number } {
+    return { x: this.x, y: this.y, height: this.catHeightPx() };
+  }
+
   /* ---------------- internals ---------------- */
 
   private catHeightPx(): number {
