@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { ShowcaseContent } from "./ShowcaseContent";
 
 export const metadata: Metadata = {
-  title: "Showcase — Comnyang",
-  description: "Fur patterns the community has dressed their Comnyangs in.",
+  title: "Showcase — AgentPaw",
+  description: "Fur patterns the community has dressed their AgentPaws in.",
 };
 
 export default function ShowcasePage() {
