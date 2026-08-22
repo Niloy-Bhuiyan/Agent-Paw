@@ -19,11 +19,11 @@ const dotGothic = DotGothic16({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
-  title: "Comnyang, the pixel cat in your computer",
+  title: "AgentPaw, the pixel cat in your computer",
   description:
     "A tiny pixel cat that lives on your desktop — it watches your cursor, kneads while you type, and nudges you to stretch. Recreation built for study purposes.",
   openGraph: {
-    title: "Comnyang — a pixel cat that lives on your desktop",
+    title: "AgentPaw — a pixel cat that lives on your desktop",
     description:
       "A tiny pixel cat that follows your cursor, reacts to typing, and reminds you to stretch.",
     type: "website",

@@ -13,11 +13,11 @@ export function Header() {
     <header className="relative z-[100] flex items-center justify-between border-b border-line px-5 py-6 sm:px-10 lg:px-14">
       <Link
         href="/"
-        aria-label="Comnyang home"
+        aria-label="AgentPaw home"
         className="focus-pixel flex items-center gap-3 text-fg transition-colors hover:text-pop"
       >
         <CatLogo className="text-current" />
-        <span className="pixel-heading text-[22px] tracking-[0.18em]">COMNYANG</span>
+        <span className="pixel-heading text-[22px] tracking-[0.18em]">AGENTPAW</span>
       </Link>
 
       <nav aria-label="Primary" className="hidden items-center gap-7 md:flex">

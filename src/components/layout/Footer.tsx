@@ -13,8 +13,8 @@ export function Footer() {
     <footer className="relative z-10 border-t border-line px-5 py-10 sm:px-10 lg:px-14">
       <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
         <div>
-          <p className="pixel-heading text-[20px] tracking-[0.18em]">COMNYANG</p>
-          <p className="mt-1 text-[13px] text-fg-dim">© {new Date().getFullYear()} Comnyang</p>
+          <p className="pixel-heading text-[20px] tracking-[0.18em]">AGENTPAW</p>
+          <p className="mt-1 text-[13px] text-fg-dim">© {new Date().getFullYear()} AgentPaw</p>
         </div>
         <nav
           aria-label="Footer"

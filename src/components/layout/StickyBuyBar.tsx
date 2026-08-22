@@ -49,7 +49,7 @@ export function StickyBuyBar() {
         <span className="flex items-center gap-2">
           <CatLogo size={22} />
           <span className="pixel-heading hidden text-[18px] tracking-[0.16em] sm:inline">
-            COMNYANG
+            AGENTPAW
           </span>
         </span>
         <span className="pixel-heading hidden flex-1 text-center text-[15px] tracking-[0.2em] text-fg-dim md:block">
