@@ -162,7 +162,7 @@ function StatusIndicator() {
 
 function TypingDots() {
   return (
-    <span className="pixel-heading inline-flex gap-1 text-[16px] text-fg-dim" aria-label="Comnyang is thinking">
+    <span className="pixel-heading inline-flex gap-1 text-[16px] text-fg-dim" aria-label="AgentPaw is thinking">
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}

@@ -452,7 +452,7 @@ function MemorySettingsBody() {
           type="text"
           value={memory.companionName}
           maxLength={20}
-          onChange={(e) => companionMemory.set({ companionName: e.target.value || "Comnyang" })}
+          onChange={(e) => companionMemory.set({ companionName: e.target.value || "AgentPaw" })}
           aria-label="Companion name"
           className="focus-pixel w-full border-2 border-line bg-bg-2 px-2 py-1.5 font-mono text-[12px] text-fg"
         />
