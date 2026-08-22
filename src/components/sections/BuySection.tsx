@@ -43,7 +43,7 @@ export function BuySection({ id, bottom = false }: { id?: string; bottom?: boole
     <section
       id={id}
       data-buy-section
-      aria-label="Buy Comnyang"
+      aria-label="Buy AgentPaw"
       className={`relative z-10 flex justify-center px-5 sm:px-10 ${bottom ? "py-24" : "py-16"}`}
     >
       <motion.div

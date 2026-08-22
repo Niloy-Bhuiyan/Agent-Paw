@@ -41,7 +41,7 @@ export function MotionsSection() {
       </p>
 
       <nav
-        aria-label="Comnyang social links"
+        aria-label="AgentPaw social links"
         className="mt-8 flex items-center justify-center gap-8"
       >
         {site.socials.map((social) => (

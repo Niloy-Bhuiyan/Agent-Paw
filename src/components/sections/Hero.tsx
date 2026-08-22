@@ -68,7 +68,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
-          aria-label="Comnyang live demo"
+          aria-label="AgentPaw live demo"
         >
           <div className="flex aspect-square flex-col border-2 border-fg bg-bg-2 shadow-[4px_4px_0_0_#f5f5f5]">
             <div className="flex items-center gap-2 border-b-2 border-fg px-4 py-2.5">
@@ -86,7 +86,7 @@ export function Hero() {
                 interactive
                 jumpOnClick
                 scale={0.4}
-                ariaLabel="Comnyang wandering around a desktop"
+                ariaLabel="AgentPaw wandering around a desktop"
               />
               <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-[11px] tracking-[0.1em] text-fg-dim/70">
                 {t("hero.frame.hint")}
