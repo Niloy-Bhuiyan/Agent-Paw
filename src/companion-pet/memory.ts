@@ -26,11 +26,11 @@ export interface CompanionMemory {
   history: ConversationTurn[];
 }
 
-const STORAGE_KEY = "comnyang.pet.memory.v1";
+const STORAGE_KEY = "agentpaw.pet.memory.v1";
 const HISTORY_LIMIT = 40;
 
 const defaults = (): CompanionMemory => ({
-  companionName: "Comnyang",
+  companionName: "AgentPaw",
   userName: null,
   greetingsCount: 0,
   firstMetAt: Date.now(),

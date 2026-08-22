@@ -74,7 +74,7 @@ export interface PetSettings {
   premium: PremiumSettings;
 }
 
-const STORAGE_KEY = "comnyang.pet.settings.v1";
+const STORAGE_KEY = "agentpaw.pet.settings.v1";
 
 export const defaultSettings = (): PetSettings => ({
   personality: "playful",
