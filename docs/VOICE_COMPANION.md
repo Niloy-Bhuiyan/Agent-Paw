@@ -76,7 +76,7 @@ same, so swapping a mock for a real backend touches only that tool.
 ## Memory
 
 `src/companion-pet/memory.ts`, persisted to
-`localStorage["comnyang.pet.memory.v1"]`: companion name, your name,
+`localStorage["agentpaw.pet.memory.v1"]`: companion name, your name,
 goals, achievements, streaks, conversation history (rolling 40 turns),
 greeting counts, favorites. It **learns from conversation** — "my name is
 Ana", "call me Sam", "remind me to ship v2", "I'll call you Mochi" are

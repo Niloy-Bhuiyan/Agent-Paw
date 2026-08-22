@@ -1,4 +1,4 @@
-# Comnyang — Recreation
+# AgentPaw — Recreation
 
 A production-quality recreation of [comnyang.com/en](https://www.comnyang.com/en) —
 a landing page for a pixel cat that lives on your desktop.

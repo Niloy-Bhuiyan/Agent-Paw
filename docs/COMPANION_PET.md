@@ -102,7 +102,7 @@ worried, sad, embarrassed, sleeping, stretching, greeting.
 ## Settings & persistence
 
 `petSettingsStore` (`settings.ts`) persists to
-`localStorage["comnyang.pet.settings.v1"]` and applies every change
+`localStorage["agentpaw.pet.settings.v1"]` and applies every change
 instantly via `useSyncExternalStore`. The Settings panel is generated from
 the registries, so new metrics/reaction groups appear automatically.
 
