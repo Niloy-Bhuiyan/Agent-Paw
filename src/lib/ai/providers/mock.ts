@@ -41,7 +41,7 @@ const buildReply = (messages: ChatMessage[]): string => {
   if (/stretch|break|tired/i.test(topic))
     return `${opener} Yes! Paws up, reach for the ceiling, hold it... perfect. ${closer}`;
   if (/name/i.test(topic))
-    return `${opener} I'm Comnyang — the pixel cat living rent-free in your computer. ${closer}`;
+    return `${opener} I'm AgentPaw — the pixel cat living rent-free in your computer. ${closer}`;
   if (/\?$/.test(topic))
     return `${opener} Hmm, "${topic}" — my whiskers say the answer is closer than you think. I'm a mock cat though; add a real API key and I get much smarter. ${closer}`;
   return `${opener} I heard "${topic}" and I have decided it is very interesting. Tell me more while I sit on your warm laptop. ${closer}`;
