@@ -23,7 +23,7 @@ export function DownloadContent() {
           variants={fadeUp}
           className="stage-grid mb-10 aspect-square w-[240px] border-2 border-fg bg-bg-2"
         >
-          <PixelCat mode="auto" variant="orange" scale={0.5} ariaLabel="Comnyang waiting for download" />
+          <PixelCat mode="auto" variant="orange" scale={0.5} ariaLabel="AgentPaw waiting for download" />
         </motion.div>
 
         <motion.h1 variants={fadeUp} className="pixel-heading text-[clamp(32px,5vw,52px)]">
