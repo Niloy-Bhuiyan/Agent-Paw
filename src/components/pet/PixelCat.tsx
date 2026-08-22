@@ -124,18 +124,33 @@ export const PixelCat = forwardRef<PixelCatHandle, PixelCatProps>(function Pixel
     engineRef.current?.endDrag();
   };
 
+  const downInfo = useRef<{ t: number; x: number; y: number } | null>(null);
+
   const handleDown = (e: ReactPointerEvent<HTMLCanvasElement>) => {
     const engine = engineRef.current;
     if (!engine) return;
+    downInfo.current = { t: performance.now(), x: e.clientX, y: e.clientY };
     if (draggable) {
       e.currentTarget.setPointerCapture(e.pointerId);
       const p = toStage(e);
       engine.startDrag(p.x, p.y);
+    } else if (jumpOnClick) {
+      engine.jump();
     }
-    if (jumpOnClick) engine.jump();
   };
 
-  const handleUp = () => engineRef.current?.endDrag();
+  const handleUp = (e?: ReactPointerEvent<HTMLCanvasElement>) => {
+    const engine = engineRef.current;
+    engine?.endDrag();
+    // When both draggable and jumpOnClick: a quick tap (no real movement)
+    // still jumps; a hold-and-move is a drag, not a jump.
+    if (engine && draggable && jumpOnClick && e && downInfo.current) {
+      const dt = performance.now() - downInfo.current.t;
+      const moved = Math.hypot(e.clientX - downInfo.current.x, e.clientY - downInfo.current.y);
+      if (dt < 260 && moved < 8) engine.jump();
+    }
+    downInfo.current = null;
+  };
 
   return (
     <canvas

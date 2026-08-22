@@ -16,7 +16,7 @@
    ============================================================ */
 
 const path = require("path");
-const { app, BrowserWindow, globalShortcut, ipcMain, screen } = require("electron");
+const { app, BrowserWindow, globalShortcut, ipcMain, Menu, screen } = require("electron");
 
 const MODE = process.env.PET_MODE === "corner" ? "corner" : "roam";
 const BASE_URL = process.env.PET_URL || "http://localhost:3000/desktop";
@@ -47,6 +47,7 @@ function createWindow() {
   win = new BrowserWindow({
     ...bounds,
     transparent: true,
+    backgroundColor: "#00000000", // fully transparent — no rectangle, ever
     frame: false,
     resizable: false,
     maximizable: false,
@@ -97,6 +98,17 @@ ipcMain.on("pet:set-interactive", (_event, interactive) => {
 });
 
 ipcMain.on("pet:quit", () => app.quit());
+
+// Right-click menu on the cat — includes the "remove cat" escape hatch.
+ipcMain.on("pet:menu", () => {
+  if (!win) return;
+  Menu.buildFromTemplate([
+    { label: "😴 Sleep / wake", click: () => win?.webContents.send("pet:action", "sleep") },
+    { label: "🐈 Change fur", click: () => win?.webContents.send("pet:action", "fur") },
+    { type: "separator" },
+    { label: "✕ Remove cat (quit)", accelerator: "Ctrl+Alt+Q", click: () => app.quit() },
+  ]).popup({ window: win });
+});
 
 app.whenReady().then(() => {
   createWindow();

@@ -62,9 +62,12 @@ export function DesktopPet() {
   }, []);
 
   // Roam mode: watch the pointer; flip window interactivity near the cat.
+  // While the mouse button is held (dragging the cat), stay interactive even
+  // if the pointer briefly outruns the cat — otherwise the drag would drop.
   useEffect(() => {
     if (!roam) return;
     let interactive = false;
+    let pointerHeld = false;
     let raf = 0;
 
     const check = (clientX: number, clientY: number) => {
@@ -78,10 +81,11 @@ export function DesktopPet() {
       const near =
         Math.abs(clientX - catScreenX) < NEAR_X &&
         clientY > rect.top + (rect.height - pos.height - 40);
-      if (near !== interactive) {
-        interactive = near;
-        window.petDesktop?.setInteractive(near);
-        setHover(near);
+      const wantInteractive = near || (pointerHeld && interactive);
+      if (wantInteractive !== interactive) {
+        interactive = wantInteractive;
+        window.petDesktop?.setInteractive(wantInteractive);
+        setHover(wantInteractive);
       }
     };
 
@@ -89,10 +93,21 @@ export function DesktopPet() {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => check(e.clientX, e.clientY));
     };
+    const onDown = () => {
+      pointerHeld = true;
+    };
+    const onUp = (e: PointerEvent) => {
+      pointerHeld = false;
+      check(e.clientX, e.clientY);
+    };
 
     window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerdown", onDown);
+    window.addEventListener("pointerup", onUp);
     return () => {
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointerup", onUp);
       cancelAnimationFrame(raf);
       window.petDesktop?.setInteractive(false);
     };
@@ -118,8 +133,7 @@ export function DesktopPet() {
   }, [settings.personality]);
 
   const cycleVariant = () => {
-    const idx = CAT_VARIANTS.indexOf(variant);
-    setVariant(CAT_VARIANTS[(idx + 1) % CAT_VARIANTS.length] as CatVariant);
+    setVariant((v) => CAT_VARIANTS[(CAT_VARIANTS.indexOf(v) + 1) % CAT_VARIANTS.length] as CatVariant);
     catRef.current?.engine?.emitParticles("sparkle", 5);
   };
 
@@ -130,13 +144,39 @@ export function DesktopPet() {
     else window.close();
   };
 
+  // Native right-click menu actions (sleep / fur) from the Electron shell.
+  useEffect(() => {
+    const unsubscribe = window.petDesktop?.onAction((action) => {
+      if (action === "sleep") toggleSleep();
+      if (action === "fur") cycleVariant();
+    });
+    return unsubscribe;
+  }, []);
+
+  const openMenu = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (window.petDesktop?.showMenu) window.petDesktop.showMenu();
+    else toggleSleep(); // plain-browser fallback
+  };
+
+  // Belt-and-braces transparency: applied in the server-rendered markup,
+  // so no dark rectangle can ever flash before hydration.
+  const transparencyCss = (
+    <style>{`
+      html, body { background: transparent !important; }
+      :root { color-scheme: normal; }
+      ::-webkit-scrollbar { display: none; }
+    `}</style>
+  );
+
   const cat = (
     <PixelCat
       ref={catRef}
       mode={mode}
       variant={variant}
-      scale={roam ? 0.62 : 0.62}
+      scale={0.62}
       jumpOnClick
+      draggable
       ariaLabel={`${companionMemory.get().companionName}, your desktop pet`}
     />
   );
@@ -146,7 +186,7 @@ export function DesktopPet() {
     const anchorX = clamp(catX, 130, Math.max(130, (typeof window !== "undefined" ? window.innerWidth : 800) - 130));
     return (
       <div className="relative h-screen w-screen select-none overflow-hidden">
-        <style>{`::-webkit-scrollbar { display: none; }`}</style>
+        {transparencyCss}
 
         {/* Bubble + toolbar anchored above the cat's current position */}
         <div
@@ -187,13 +227,10 @@ export function DesktopPet() {
         {/* The strip the cat wanders across — full screen width */}
         <div
           ref={stripRef}
-          className="absolute inset-x-0 bottom-0 cursor-crosshair"
+          className="absolute inset-x-0 bottom-0"
           style={{ height: ROAM_STRIP_H }}
           onDoubleClick={cycleVariant}
-          onContextMenu={(e) => {
-            e.preventDefault();
-            toggleSleep();
-          }}
+          onContextMenu={openMenu}
         >
           {cat}
         </div>
@@ -208,10 +245,10 @@ export function DesktopPet() {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
+      {transparencyCss}
       <style>{`
         .drag-region { -webkit-app-region: drag; }
         .no-drag { -webkit-app-region: no-drag; }
-        ::-webkit-scrollbar { display: none; }
       `}</style>
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex h-[76px] items-end justify-center">
@@ -219,12 +256,9 @@ export function DesktopPet() {
       </div>
 
       <div
-        className="no-drag absolute inset-x-0 bottom-0 top-[72px] cursor-crosshair"
+        className="no-drag absolute inset-x-0 bottom-0 top-[72px]"
         onDoubleClick={cycleVariant}
-        onContextMenu={(e) => {
-          e.preventDefault();
-          toggleSleep();
-        }}
+        onContextMenu={openMenu}
       >
         {cat}
       </div>
