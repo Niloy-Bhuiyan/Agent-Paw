@@ -1,6 +1,6 @@
 /** Central site configuration — prices, links, socials. */
 export const site = {
-  name: "COMNYANG",
+  name: "AGENTPAW",
   basePrice: 3.9,
   coffeePrice: 1.9,
   priceTag: "LAUNCH",
