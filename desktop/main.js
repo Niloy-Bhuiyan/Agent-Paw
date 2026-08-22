@@ -1,5 +1,5 @@
 /* ============================================================
-   Comnyang Desktop Pet — Electron shell.
+   AgentPaw Desktop Pet — Electron shell.
 
    Two modes (env PET_MODE):
    - "roam"   (default): a transparent, click-through overlay the
@@ -55,7 +55,7 @@ function createWindow() {
     hasShadow: false,
     skipTaskbar: false, // keep a taskbar entry so it's always easy to close
     alwaysOnTop: true,
-    title: "Comnyang",
+    title: "AgentPaw",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
